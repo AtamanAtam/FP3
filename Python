@@ -1,0 +1,48 @@
+def update_dict(original: dict, key, value) -> dict:
+    """Повертає нову копію словника з оновленим значенням за ключем"""
+    new_dict = original.copy()
+    new_dict[key] = value
+    return new_dict
+
+
+def append_tuple(tpl: tuple, item) -> tuple:
+    """Повертає новий кортеж з доданим елементом в кінець"""
+    return tpl + (item,)
+
+
+def push(stack: list, item) -> list:
+    """Повертає нову копію списку з новим елементом на початку"""
+    return [item] + stack.copy()
+
+
+def test_all_tasks():
+    print("Завдання 2: Незмінне оновлення словника")
+    d1 = {'a': 1, 'b': 2}
+    d2 = update_dict(d1, 'b', 99)
+    print(f"d1 = {d1}")
+    print(f"d2 = {d2}")
+    print(f"d1 не змінено: {d1 == {'a': 1, 'b': 2}}")
+    print(f"d2 оновлено: {d2 == {'a': 1, 'b': 99}}")
+    print()
+    
+    print("Завдання 3: Незмінне додавання до кортежу")
+    t1 = (1, 2, 3)
+    t2 = append_tuple(t1, 4)
+    t3 = append_tuple((), 99)
+    print(f"t1 = {t1}")
+    print(f"t2 = {t2}")
+    print(f"t3 = {t3}")
+    print(f"t1 не змінено: {t1 == (1, 2, 3)}")
+    print()
+    
+    print("Завдання 5: Імітація push для списку")
+    s1 = [3, 2, 1]
+    s2 = push(s1, 4)
+    print(f"s1 = {s1}")
+    print(f"s2 = {s2}")
+    print(f"s1 не змінено: {s1 == [3, 2, 1]}")
+    print(f"s2 оновлено: {s2 == [4, 3, 2, 1]}")
+
+
+if __name__ == "__main__":
+    test_all_tasks()
