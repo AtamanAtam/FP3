@@ -1,29 +1,37 @@
-# Завдання 2. Незмінне оновлення словника
-def update_dict(original: dict, key, value) -> dict:
-    """Повертає нову копію словника з оновленим значенням за ключем"""
-    new_dict = original.copy()
-    new_dict[key] = value
-    return new_dict
+-- Завдання 1. Незмінне оновлення елементів списку
+updateAt :: Int -> a -> [a] -> [a]
+updateAt _ _ [] = []
+updateAt 0 newVal (x:xs) = newVal : xs
+updateAt n newVal (x:xs)
+    | n < 0 = x:xs
+    | otherwise = x : updateAt (n-1) newVal xs
 
-# Завдання 3. Незмінне додавання до кортежу
-def append_tuple(tpl: tuple, item) -> tuple:
-    """Повертає новий кортеж з доданим елементом в кінець"""
-    return tpl + (item,)
+-- Завдання 4. Створення оновленої копії запису
+data Person = Person { name :: String, age :: Int } deriving (Show, Eq)
 
-# Завдання 5. Імітація push для списку з незмінністю
-def push(stack: list, item) -> list:
-    """Повертає нову копію списку з новим елементом на початку"""
-    return [item] + stack.copy()
+incrementAge :: Person -> Person
+incrementAge (Person n a) = Person n (a + 1)
 
-# Тестування всіх завдань
-def test_all_tasks():
-    print("=== Завдання 2: Незмінне оновлення словника ===")
-    d1 = {'a': 1, 'b': 2}
-    d2 = update_dict(d1, 'b', 99)
-    print(f"d1 = {d1}")
-    print(f"d2 = {d2}")
-    print(f"d1 не змінено: {d1 == {'a': 1, 'b': 2}}")
-    print(f"d2 оновлено: {d2 == {'a': 1, 'b': 99}}")
-    print()
+-- Завдання 6. Видалення елемента з незмінного списку
+removeAt :: Int -> [a] -> [a]
+removeAt _ [] = []
+removeAt 0 (x:xs) = xs
+removeAt n (x:xs)
+    | n < 0 = x:xs
+    | otherwise = x : removeAt (n-1) xs
+
+main :: IO ()
+main = do
+    putStrLn "Завдання 1: updateAt"
+    print $ updateAt 1 99 [10, 20, 30]
+    print $ updateAt 0 42 []
+    print $ updateAt 5 7 [1,2,3]
     
-    print("=== Завдання 3: Незмінне додавання до кор
+    putStrLn "\nЗавдання 4: incrementAge"
+    let p = Person "Anna" 25
+    print $ incrementAge p
+    print p
+    
+    putStrLn "\nЗавдання 6: removeAt"
+    print $ removeAt 1 [10, 20, 30]
+    print $ removeAt 5 [1, 2, 3]
